@@ -312,6 +312,14 @@ Config.JobInteractions = {
             event = 'lawbadge',
             shouldClose = true
         },
+        {
+            id = 'lawmdt',
+            title = 'Law MDT',
+            icon = 'book-open',
+            type = 'command',
+            event = 'mdt',
+            shouldClose = true
+        },
     },
     ['rholaw'] = {
         {
@@ -352,6 +360,14 @@ Config.JobInteractions = {
             icon = 'id-badge',
             type = 'command',
             event = 'lawbadge',
+            shouldClose = true
+        },
+        {
+            id = 'lawmdt',
+            title = 'Law MDT',
+            icon = 'book-open',
+            type = 'command',
+            event = 'mdt',
             shouldClose = true
         },
     },
@@ -396,6 +412,14 @@ Config.JobInteractions = {
             event = 'lawbadge',
             shouldClose = true
         },
+        {
+            id = 'lawmdt',
+            title = 'Law MDT',
+            icon = 'book-open',
+            type = 'command',
+            event = 'mdt',
+            shouldClose = true
+        },
     },
     ['strlaw'] = {
         {
@@ -438,6 +462,14 @@ Config.JobInteractions = {
             event = 'lawbadge',
             shouldClose = true
         },
+        {
+            id = 'lawmdt',
+            title = 'Law MDT',
+            icon = 'book-open',
+            type = 'command',
+            event = 'mdt',
+            shouldClose = true
+        },
     },
     ['stdenlaw'] = {
         {
@@ -478,6 +510,14 @@ Config.JobInteractions = {
             icon = 'id-badge',
             type = 'command',
             event = 'lawbadge',
+            shouldClose = true
+        },
+        {
+            id = 'lawmdt',
+            title = 'Law MDT',
+            icon = 'book-open',
+            type = 'command',
+            event = 'mdt',
             shouldClose = true
         },
     },
