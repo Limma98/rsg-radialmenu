@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+/* ── Palette ─────────────────────────────────────────────────────────────── */
+:root {
+    --sector-bg:     rgba(14, 14, 14, 0.92);
+    --sector-stroke: rgba(224, 123, 57, 0.28);
+    --center-bg:     rgba(10, 10, 10, 0.94);
+    --center-stroke: rgba(224, 123, 57, 0.45);
+    --hover-fill:    #e07b39;
+    --hover-stroke:  rgba(224, 123, 57, 0.90);
+    --text:          #f0f0f0;
+    --text-muted:    #888888;
+    --glow:          drop-shadow(0 0 8px  rgba(224, 123, 57, 0.70))
+                     drop-shadow(0 0 20px rgba(224, 123, 57, 0.28));
+    --shadow:        drop-shadow(0 10px 36px rgba(0, 0, 0, 0.82));
+}
+
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+h1 { font-weight: normal; color: white; }
+div.info { margin: 12px 0; }
+div.info * { color: white; }
+#icons { display: none; }
+.container { position: absolute; left: 1000px; }
+#vehicle { fill: white; }
+
+/* ── Menu holder ─────────────────────────────────────────────────────────── */
+div.menuHolder {
+    user-select: none;
+    -moz-user-select: none;
+    position: absolute;
+    left: 0; right: 0;
+    margin: auto;
+    top: 30%;
+}
+
+svg.icons { display: none; }
+
+/* ── Base SVG (visible state) ────────────────────────────────────────────── */
+svg.menu {
+    position: absolute;
+    overflow: visible;
+    /* will-change promotes to GPU layer — filter animation stays compositor-side */
+    will-change: filter;
+    animation: menuPulse 4s ease-in-out infinite;
+    transition:
+        transform 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity   0.20s ease-out;
+}
+
+/* ── Hidden states ───────────────────────────────────────────────────────── */
+svg.menu.inner {
+    transform: scale(0.74) rotate(-7deg);
+    opacity: 0;
+    visibility: hidden;
+    /* Release GPU layer and stop animation while fully hidden */
+    will-change: auto;
+    animation: none;
+}
+
+svg.menu.outer {
+    opacity: 0;
+    visibility: hidden;
+    will-change: auto;
+    animation: none;
+}
+
+/* ── Neon ambient pulse (single shadow — lighter than double) ────────────── */
+@keyframes menuPulse {
+    0%, 100% { filter: var(--shadow); }
+    50%       { filter: var(--shadow) drop-shadow(0 0 20px rgba(224, 123, 57, 0.36)); }
+}
+
+/* ── Sector fills ────────────────────────────────────────────────────────── */
+svg.menu > g > path {
+    fill:         var(--sector-bg);
+    stroke:       var(--sector-stroke);
+    stroke-width: 0.40;
+    transition:   fill 0.13s ease, filter 0.13s ease, stroke 0.13s ease;
+}
+
+svg.menu > g.sector > path { cursor: pointer; }
+
+/* ── Sector labels / icons ───────────────────────────────────────────────── */
+svg.menu > g.sector > text,
+svg.menu > g.sector > use {
+    font-family:    'Inter', sans-serif;
+    font-size:      2.8px;
+    font-weight:    700;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    cursor:         pointer;
+    fill:           var(--text);
+    transition:     fill 0.13s ease;
+}
+
+/* ── Sector hover ────────────────────────────────────────────────────────── */
+svg.menu > g.sector:hover > path {
+    fill:   var(--hover-fill);
+    stroke: var(--hover-stroke);
+    filter: var(--glow);
+}
+
+svg.menu > g.sector:hover > text,
+svg.menu > g.sector:hover > use { fill: #fff; }
+
+/* ── Center button ───────────────────────────────────────────────────────── */
+svg.menu > g.center > circle {
+    cursor:       pointer;
+    fill:         var(--center-bg);
+    stroke:       var(--center-stroke);
+    stroke-width: 0.65;
+    transition:   fill 0.13s ease, filter 0.13s ease, stroke 0.13s ease;
+}
+
+/* Heartbeat — opacity is GPU-composited, zero repaint cost */
+svg.menu > g.center        { animation: centerBreath 3s ease-in-out infinite; }
+svg.menu > g.center:hover  { animation: none; }
+
+svg.menu > g.center:hover > circle {
+    fill:   var(--hover-fill);
+    stroke: var(--hover-stroke);
+    filter: var(--glow);
+}
+
+svg.menu > g.center > text,
+svg.menu > g.center > use {
+    font-family: 'Inter', sans-serif;
+    font-size:   2.5px;
+    font-weight: 700;
+    cursor:      pointer;
+    fill:        var(--text-muted);
+    transition:  fill 0.13s ease;
+}
+
+svg.menu > g.center:hover > text,
+svg.menu > g.center:hover > use { fill: #fff; }
+
+/* ── Center heartbeat (opacity-only = free, GPU-composited) ─────────────── */
+@keyframes centerBreath {
+    0%, 100% { opacity: 0.68; }
+    50%       { opacity: 1.00; }
+}
